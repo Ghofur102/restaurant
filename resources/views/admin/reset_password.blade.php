@@ -1,42 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8" />
+    <title>Reset Password Admin Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin Reset Password Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
+
+    <!-- preloader css -->
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/preloader.min.css') }}" type="text/css" />
+
+    <!-- Bootstrap Css -->
+    <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
+        type="text/css" />
+    <!-- Icons Css -->
+    <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+
 </head>
 
-<body class="container">
-    <h1>Admin Reset Password</h1>
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    @endif
-    @if (Session::has('error'))
-        <li>{{ Session::get('error') }}</li>
-    @endif
-    @if (Session::has('success'))
-        <li>{{ Session::get('success') }}</li>
-    @endif
-    <form action="{{ route('admin.reset_password_submit') }}" method="post">
-        @csrf
-        <input type="hidden" name="email" value="{{ $email }}">
-        <input type="hidden" name="token" value="{{ $token }}">
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">New Password</label>
-            <input type="email" name="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+<body>
+
+    <!-- <body data-layout="horizontal"> -->
+    <div class="auth-page">
+        <div class="container p-0">
+            <div class="">
+                <div class="p-4 auth-full-page-content d-flex p-sm-5">
+                    <div class="w-100">
+                        <div class="d-flex flex-column h-50">
+                            <div class="mb-4 text-center mb-md-5">
+                                <a href="index.html" class="d-block auth-logo">
+                                    <img src="{{ asset('backend/assets/images/logo-sm.svg') }}" alt=""
+                                        height="28"> <span class="logo-txt">Restaurant</span>
+                                </a>
+                            </div>
+                            <div class="my-auto auth-content">
+                                <div class="text-center">
+                                    <h5 class="mb-0">Reset Password !</h5>
+                                    <p class="mt-2 text-muted">Input new password and confirmation password.</p>
+                                </div>
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <strong>Error!</strong> {{ $error }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if (Session::has('error'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>Error!</strong> {{ Session::get('error') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                @if (Session::has('success'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>Success!</strong> {{ Session::get('success') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                <form class="pt-2 mt-4" action="{{ route('admin.reset_password_submit') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="email" value="{{ $email }}">
+                                    <input type="hidden" name="token" value="{{ $token }}">
+                                    <div class="mb-3">
+                                        <label class="form-label">Password</label>
+                                        <input type="password" class="form-control" name="password" id="password"
+                                            placeholder="Enter new password">
+                                    </div>
+                                     <div class="mb-3">
+                                        <label class="form-label">Confirm New Password</label>
+                                        <input type="password" class="form-control" name="password_confirmation" id="password_confirmation"
+                                            placeholder="Enter password confirmation">
+                                    </div>
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary w-100 waves-effect waves-light"
+                                            type="submit">Reset Password</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
         </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Confirm New Password</label>
-            <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword1">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <!-- end container fluid -->
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="{{ asset('backend/assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/metismenu/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/feather-icons/feather.min.js') }}"></script>
+    <!-- pace js -->
+    <script src="{{ asset('backend/assets/libs/pace-js/pace.min.js') }}"></script>
+    <!-- password addon init -->
+    <script src="{{ asset('backend/assets/js/pages/pass-addon.init.js') }}"></script>
+
 </body>
 
 </html>
