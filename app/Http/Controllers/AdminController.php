@@ -57,7 +57,7 @@ class AdminController extends Controller
         $token = hash('sha256', time());
         $admin_data->token = $token;
         $admin_data->update();
-        $reset_link = url('admin/reset-password/'.$token.'/'.$request->email);
+        $reset_link = url('admin/reset_password/'.$token.'/'.$request->email);
         $subject = "Reset Password";
         $body = "Please Clink on below link to reset password<br>";
         $body .= "<a href='".$reset_link."'>Click Here</a>";
@@ -83,5 +83,9 @@ class AdminController extends Controller
         $admin_data->update();
 
         return redirect()->route('admin.login')->with('success', 'Password Reset Successfully');
+    }
+
+    public function AdminProfile() {
+        return view('admin.profile');
     }
 }
