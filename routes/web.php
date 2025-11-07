@@ -28,11 +28,14 @@ Route::get('/admin/reset_password/{token}/{email}', [AdminController::class, 'Ad
 Route::post('/admin/reset_password_submit', [AdminController::class, 'AdminResetPasswordSubmit'])->name('admin.reset_password_submit');
 
 Route::middleware('admin')->group(function () {
-   Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
-   Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 
-   Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
-   Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
+    Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
+    Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
+
+    Route::get('/admin/change_password', [AdminController::class, 'AdminChangePassword'])->name('admin.change_password');
+    Route::post('/admin/update_password', [AdminController::class, 'AdminUpdatePassword'])->name('admin.update.password');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

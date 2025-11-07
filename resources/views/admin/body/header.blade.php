@@ -1,3 +1,8 @@
+ @php
+     $id = Auth::guard('admin')->id();
+     $profileData = App\Models\Admin::find($id);
+ @endphp
+
  <header id="page-topbar">
      <div class="navbar-header">
          <div class="d-flex">
@@ -214,16 +219,16 @@
                      id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                      aria-expanded="false">
                      <img class="rounded-circle header-profile-user"
-                         src="{{ asset('backend/assets/images/users/avatar-1.jpg') }}" alt="Header Avatar">
-                     <span class="d-none d-xl-inline-block ms-1 fw-medium">Shawn L.</span>
+                         src="{{ !empty($admin_data->photo) ? asset('upload/admin_images/'.$profileData->photo) : asset('upload/no_image.jpg') }}" alt="Header Avatar">
+                     <span class="d-none d-xl-inline-block ms-1 fw-medium">{{ $profileData->name }}</span>
                      <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                  </button>
                  <div class="dropdown-menu dropdown-menu-end">
                      <!-- item-->
                      <a class="dropdown-item" href="{{ route('admin.profile') }}"><i
                              class="align-middle mdi mdi-face-man font-size-16 me-1"></i> Profile</a>
-                     <a class="dropdown-item" href="auth-lock-screen.html"><i
-                             class="align-middle mdi mdi-lock font-size-16 me-1"></i> Lock Screen</a>
+                     <a class="dropdown-item" href="{{ route('admin.change_password') }}"><i
+                             class="align-middle mdi mdi-lock font-size-16 me-1"></i>Change Password</a>
                      <div class="dropdown-divider"></div>
                      <a class="dropdown-item" href="{{ route('admin.logout') }}"><i
                              class="align-middle mdi mdi-logout font-size-16 me-1"></i> Logout</a>
