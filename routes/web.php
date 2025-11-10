@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// All Route for Admin
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 Route::post('/admin/login_submit', [AdminController::class, 'AdminLoginSubmit'])->name('admin.login_submit');
@@ -37,5 +40,9 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/change_password', [AdminController::class, 'AdminChangePassword'])->name('admin.change_password');
     Route::post('/admin/update_password', [AdminController::class, 'AdminUpdatePassword'])->name('admin.update.password');
 });
+
+// All Route for Client
+Route::get('/client/login', [ClientController::class, 'ClientLogin'])->name('client.login');
+Route::get('/client/register', [ClientController::class, 'ClientRegister'])->name('client.register');
 
 require __DIR__ . '/auth.php';

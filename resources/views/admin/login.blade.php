@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="my-auto auth-content">
                                     <div class="text-center">
-                                        <h5 class="mb-0">Welcome Back !</h5>
+                                        <h5 class="mb-0">Login Admin Page !</h5>
                                         <p class="mt-2 text-muted">Sign in to continue to Dashboard Admin.</p>
                                     </div>
                                     @if ($errors->any())
