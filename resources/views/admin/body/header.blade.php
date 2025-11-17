@@ -1,8 +1,3 @@
- @php
-     $id = Auth::guard('admin')->id();
-     $profileData = App\Models\Admin::find($id);
- @endphp
-
  <header id="page-topbar">
      <div class="navbar-header">
          <div class="d-flex">
@@ -219,7 +214,8 @@
                      id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                      aria-expanded="false">
                      <img class="rounded-circle header-profile-user"
-                         src="{{ !empty($admin_data->photo) ? asset('upload/admin_images/'.$profileData->photo) : asset('upload/no_image.jpg') }}" alt="Header Avatar">
+                         src="{{ !empty($profileData->photo) ? asset('upload/admin_images/' . $profileData->photo) : asset('upload/no_image.jpg') }}"
+                         alt="Header Avatar">
                      <span class="d-none d-xl-inline-block ms-1 fw-medium">{{ $profileData->name }}</span>
                      <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                  </button>

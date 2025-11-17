@@ -44,5 +44,18 @@ Route::middleware('admin')->group(function () {
 // All Route for Client
 Route::get('/client/login', [ClientController::class, 'ClientLogin'])->name('client.login');
 Route::get('/client/register', [ClientController::class, 'ClientRegister'])->name('client.register');
+Route::post('/client/login/submit', [ClientController::class, 'ClientLoginSubmit'])->name('client.login.submit');
+Route::post('/client/register/submit', [ClientController::class, 'ClientRegisterSubmit'])->name('client.register.submit');
+
+Route::middleware('client')->group(function () {
+    Route::get('/client/client_dashboard', [ClientController::class, 'ClientDashboard'])->name('client.client_dashboard');
+    Route::get('/client/logout', [ClientController::class, 'ClientLogout'])->name('client.logout');
+
+    Route::get('/client/profile', [ClientController::class, 'ClientProfile'])->name('client.profile');
+    Route::post('/client/profile/store', [ClientController::class, 'ClientProfileStore'])->name('client.profile.store');
+
+    Route::get('/client/change_password', [ClientController::class, 'ClientChangePassword'])->name('client.change_password');
+    Route::post('/client/update_password', [ClientController::class, 'ClientUpdatePassword'])->name('client.update.password');
+});
 
 require __DIR__ . '/auth.php';

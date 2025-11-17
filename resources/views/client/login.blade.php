@@ -22,6 +22,7 @@
     <!-- App Css-->
     <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 </head>
 
 <body>
@@ -49,23 +50,26 @@
                                         @foreach ($errors->all() as $error)
                                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                                 <strong>Error!</strong> {{ $error }}
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
                                             </div>
                                         @endforeach
                                     @endif
                                     @if (Session::has('error'))
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                             <strong>Error!</strong> {{ Session::get('error') }}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
                                         </div>
                                     @endif
                                     @if (Session::has('success'))
                                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                                             <strong>Success!</strong> {{ Session::get('success') }}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
                                         </div>
                                     @endif
-                                    <form class="pt-2 mt-4" action="{{ route('admin.login_submit') }}" method="POST">
+                                    <form class="pt-2 mt-4" action="{{ route('client.login.submit') }}" method="POST">
                                         @csrf
                                         <div class="mb-3">
                                             <label class="form-label">Email</label>
@@ -79,12 +83,11 @@
                                                 </div>
                                                 <div class="flex-shrink-0">
                                                     <div class="">
-                                                        <a href="/admin/forget_password"
-                                                            class="text-muted">Forget password?</a>
+                                                        <a href="/admin/forget_password" class="text-muted">Forget
+                                                            password?</a>
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="input-group auth-pass-inputgroup">
                                                 <input type="password" class="form-control" name="password"
                                                     placeholder="Enter password" aria-label="Password"
@@ -93,151 +96,157 @@
                                                     id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                             </div>
                                         </div>
+                                        <a class="text-sm text-gray-600 underline rounded-md dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                                            href="{{ route('client.register') }}">
+                                            {{ __('Dont have account? Register Now!') }}
+                                        </a>
                                         <div class="mb-3">
                                             <button class="btn btn-primary w-100 waves-effect waves-light"
                                                 type="submit">Log In</button>
                                         </div>
                                     </form>
 
-                            </div>
-                            <div class="mt-4 text-center mt-md-5">
-                                <p class="mb-0">©
-                                    <script>
-                                        document.write(new Date().getFullYear())
-                                    </script> Minia . Crafted with <i
-                                        class="mdi mdi-heart text-danger"></i> by Themesbrand
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end auth full page content -->
-            </div>
-            <!-- end col -->
-            <div class="col-xxl-9 col-lg-8 col-md-7">
-                <div class="p-4 auth-bg pt-md-5 d-flex">
-                    <div class="bg-overlay bg-primary"></div>
-                    <ul class="bg-bubbles">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                    <!-- end bubble effect -->
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-xl-7">
-                            <div class="p-0 p-sm-4 px-xl-0">
-                                <div id="reviewcarouselIndicators" class="carousel slide" data-bs-ride="carousel">
-                                    <div
-                                        class="mb-0 carousel-indicators carousel-indicators-rounded justify-content-start ms-0">
-                                        <button type="button" data-bs-target="#reviewcarouselIndicators"
-                                            data-bs-slide-to="0" class="active" aria-current="true"
-                                            aria-label="Slide 1"></button>
-                                        <button type="button" data-bs-target="#reviewcarouselIndicators"
-                                            data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                        <button type="button" data-bs-target="#reviewcarouselIndicators"
-                                            data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                    </div>
-                                    <!-- end carouselIndicators -->
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <div class="text-white testi-contain">
-                                                <i class="bx bxs-quote-alt-left text-success display-6"></i>
-
-                                                <h4 class="mt-4 text-white fw-medium lh-base">“I feel confident
-                                                    imposing change
-                                                    on myself. It's a lot more progressing fun than looking back.
-                                                    That's why
-                                                    I ultricies enim
-                                                    at malesuada nibh diam on tortor neaded to throw curve balls.”
-                                                </h4>
-                                                <div class="pt-3 pb-5 mt-4">
-                                                    <div class="d-flex align-items-start">
-                                                        <div class="flex-shrink-0">
-                                                            <img src="{{ asset('backend/assets/images/users/avatar-1.jpg') }}"
-                                                                class="avatar-md img-fluid rounded-circle"
-                                                                alt="...">
-                                                        </div>
-                                                        <div class="mb-4 flex-grow-1 ms-3">
-                                                            <h5 class="text-white font-size-18">Richard Drews
-                                                            </h5>
-                                                            <p class="mb-0 text-white-50">Web Designer</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="carousel-item">
-                                            <div class="text-white testi-contain">
-                                                <i class="bx bxs-quote-alt-left text-success display-6"></i>
-
-                                                <h4 class="mt-4 text-white fw-medium lh-base">“Our task must be to
-                                                    free ourselves by widening our circle of compassion to embrace
-                                                    all living
-                                                    creatures and
-                                                    the whole of quis consectetur nunc sit amet semper justo. nature
-                                                    and its beauty.”</h4>
-                                                <div class="pt-3 pb-5 mt-4">
-                                                    <div class="d-flex align-items-start">
-                                                        <div class="flex-shrink-0">
-                                                            <img src="{{ asset('backend/assets/images/users/avatar-2.jpg') }}"
-                                                                class="avatar-md img-fluid rounded-circle"
-                                                                alt="...">
-                                                        </div>
-                                                        <div class="mb-4 flex-grow-1 ms-3">
-                                                            <h5 class="text-white font-size-18">Rosanna French
-                                                            </h5>
-                                                            <p class="mb-0 text-white-50">Web Developer</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="carousel-item">
-                                            <div class="text-white testi-contain">
-                                                <i class="bx bxs-quote-alt-left text-success display-6"></i>
-
-                                                <h4 class="mt-4 text-white fw-medium lh-base">“I've learned that
-                                                    people will forget what you said, people will forget what you
-                                                    did,
-                                                    but people will never forget
-                                                    how donec in efficitur lectus, nec lobortis metus you made them
-                                                    feel.”</h4>
-                                                <div class="pt-3 pb-5 mt-4">
-                                                    <div class="d-flex align-items-start">
-                                                        <img src="{{ asset('backend/assets/images/users/avatar-3.jpg') }}"
-                                                            class="avatar-md img-fluid rounded-circle" alt="...">
-                                                        <div class="flex-1 mb-4 ms-3">
-                                                            <h5 class="text-white font-size-18">Ilse R. Eaton</h5>
-                                                            <p class="mb-0 text-white-50">Manager
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end carousel-inner -->
                                 </div>
-                                <!-- end review carousel -->
+                                <div class="mt-4 text-center mt-md-5">
+                                    <p class="mb-0">©
+                                        <script>
+                                            document.write(new Date().getFullYear())
+                                        </script> Minia . Crafted with <i
+                                            class="mdi mdi-heart text-danger"></i> by Themesbrand
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end auth full page content -->
+                </div>
+                <!-- end col -->
+                <div class="col-xxl-9 col-lg-8 col-md-7">
+                    <div class="p-4 auth-bg pt-md-5 d-flex">
+                        <div class="bg-overlay bg-primary"></div>
+                        <ul class="bg-bubbles">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <!-- end bubble effect -->
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-xl-7">
+                                <div class="p-0 p-sm-4 px-xl-0">
+                                    <div id="reviewcarouselIndicators" class="carousel slide"
+                                        data-bs-ride="carousel">
+                                        <div
+                                            class="mb-0 carousel-indicators carousel-indicators-rounded justify-content-start ms-0">
+                                            <button type="button" data-bs-target="#reviewcarouselIndicators"
+                                                data-bs-slide-to="0" class="active" aria-current="true"
+                                                aria-label="Slide 1"></button>
+                                            <button type="button" data-bs-target="#reviewcarouselIndicators"
+                                                data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                            <button type="button" data-bs-target="#reviewcarouselIndicators"
+                                                data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                        </div>
+                                        <!-- end carouselIndicators -->
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <div class="text-white testi-contain">
+                                                    <i class="bx bxs-quote-alt-left text-success display-6"></i>
+
+                                                    <h4 class="mt-4 text-white fw-medium lh-base">“I feel confident
+                                                        imposing change
+                                                        on myself. It's a lot more progressing fun than looking back.
+                                                        That's why
+                                                        I ultricies enim
+                                                        at malesuada nibh diam on tortor neaded to throw curve balls.”
+                                                    </h4>
+                                                    <div class="pt-3 pb-5 mt-4">
+                                                        <div class="d-flex align-items-start">
+                                                            <div class="flex-shrink-0">
+                                                                <img src="{{ asset('backend/assets/images/users/avatar-1.jpg') }}"
+                                                                    class="avatar-md img-fluid rounded-circle"
+                                                                    alt="...">
+                                                            </div>
+                                                            <div class="mb-4 flex-grow-1 ms-3">
+                                                                <h5 class="text-white font-size-18">Richard Drews
+                                                                </h5>
+                                                                <p class="mb-0 text-white-50">Web Designer</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="carousel-item">
+                                                <div class="text-white testi-contain">
+                                                    <i class="bx bxs-quote-alt-left text-success display-6"></i>
+
+                                                    <h4 class="mt-4 text-white fw-medium lh-base">“Our task must be to
+                                                        free ourselves by widening our circle of compassion to embrace
+                                                        all living
+                                                        creatures and
+                                                        the whole of quis consectetur nunc sit amet semper justo. nature
+                                                        and its beauty.”</h4>
+                                                    <div class="pt-3 pb-5 mt-4">
+                                                        <div class="d-flex align-items-start">
+                                                            <div class="flex-shrink-0">
+                                                                <img src="{{ asset('backend/assets/images/users/avatar-2.jpg') }}"
+                                                                    class="avatar-md img-fluid rounded-circle"
+                                                                    alt="...">
+                                                            </div>
+                                                            <div class="mb-4 flex-grow-1 ms-3">
+                                                                <h5 class="text-white font-size-18">Rosanna French
+                                                                </h5>
+                                                                <p class="mb-0 text-white-50">Web Developer</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="carousel-item">
+                                                <div class="text-white testi-contain">
+                                                    <i class="bx bxs-quote-alt-left text-success display-6"></i>
+
+                                                    <h4 class="mt-4 text-white fw-medium lh-base">“I've learned that
+                                                        people will forget what you said, people will forget what you
+                                                        did,
+                                                        but people will never forget
+                                                        how donec in efficitur lectus, nec lobortis metus you made them
+                                                        feel.”</h4>
+                                                    <div class="pt-3 pb-5 mt-4">
+                                                        <div class="d-flex align-items-start">
+                                                            <img src="{{ asset('backend/assets/images/users/avatar-3.jpg') }}"
+                                                                class="avatar-md img-fluid rounded-circle"
+                                                                alt="...">
+                                                            <div class="flex-1 mb-4 ms-3">
+                                                                <h5 class="text-white font-size-18">Ilse R. Eaton</h5>
+                                                                <p class="mb-0 text-white-50">Manager
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end carousel-inner -->
+                                    </div>
+                                    <!-- end review carousel -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- end col -->
             </div>
-            <!-- end col -->
+            <!-- end row -->
         </div>
-        <!-- end row -->
-    </div>
-    <!-- end container fluid -->
+        <!-- end container fluid -->
     </div>
 
 
@@ -252,6 +261,30 @@
     <script src="{{ asset('backend/assets/libs/pace-js/pace.min.js') }}"></script>
     <!-- password addon init -->
     <script src="{{ asset('backend/assets/js/pages/pass-addon.init.js') }}"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+                case 'info':
+                    toastr.info(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'success':
+                    toastr.success(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'warning':
+                    toastr.warning(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'error':
+                    toastr.error(" {{ Session::get('message') }} ");
+                    break;
+            }
+        @endif
+    </script>
 
 </body>
 
