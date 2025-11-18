@@ -1,63 +1,97 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!doctype html>
+<html lang="en">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Askbootstrap">
+    <meta name="author" content="Askbootstrap">
+    <title>User Login - Online Food Ordering </title>
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
+    <!-- Bootstrap core CSS-->
+    <link href="{{ asset('frontend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome-->
+    <link href="{{ asset('frontend/vendor/fontawesome/css/all.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome-->
+    <link href="{{ asset('frontend/vendor/icofont/icofont.min.css') }}" rel="stylesheet">
+    <!-- Select2 CSS-->
+    <link href="{{ asset('frontend/vendor/select2/css/select2.min.css') }}" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="{{ asset('frontend/css/osahan.css') }}" rel="stylesheet">
+</head>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required
-                autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<body class="bg-white">
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+            <div class="col-md-8 col-lg-6">
+                <div class="py-5 login d-flex align-items-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="pl-5 pr-5 mx-auto col-md-9 col-lg-8">
+                                <h3 class="mb-4 login-heading">Welcome back!</h3>
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <strong>Error!</strong> {{ $error }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if (Session::has('error'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>Error!</strong> {{ Session::get('error') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                @if (Session::has('success'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>Success!</strong> {{ Session::get('success') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                <form method="POST" action="{{ route('login.action') }}">
+                                    @csrf
+                                    <div class="form-label-group">
+                                        <input type="email" name="email" id="inputEmail" class="form-control"
+                                            placeholder="Email address">
+                                        <label for="inputEmail">Email address / Mobile</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <input type="password" name="password" id="inputPassword" class="form-control"
+                                            placeholder="Password">
+                                        <label for="inputPassword">Password</label>
+                                    </div>
+                                    <button type="submit"
+                                        class="mb-2 btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold">Sign
+                                        in</button>
+                                    <div class="pt-3 text-center">
+                                        Don't have an account? <a class="font-weight-bold"
+                                            href="{{ route('register.page') }}">Sign
+                                            Up</a>
+                                    </div>
+                                </form>
+                                <hr class="my-4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+    <!-- jQuery -->
+    <script src="{{ asset('frontend/vendor/jquery/jquery-3.3.1.slim.min.js') }}"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('frontend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- Select2 JavaScript-->
+    <script src="{{ asset('frontend/vendor/select2/js/select2.min.js') }}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('frontend/js/custom.js') }}"></script>
+</body>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block w-full mt-1" type="password" name="password" required
-                autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox"
-                    class="text-indigo-600 border-gray-300 rounded shadow-sm dark:bg-gray-900 dark:border-gray-700 focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800"
-                    name="remember">
-                <span class="text-sm text-gray-600 ms-2 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4 mb-2">
-            @if (Route::has('password.request'))
-                <a class="text-sm text-gray-600 underline rounded-md dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                    href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-
-        </div>
-        <div class="flex justify-between">
-
-            <a class="rounded-md derline trext-gray-600 mtext-sm dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                href="{{ route('admin.login') }}">
-                {{ __('Login as Admin?') }}
-            </a>
-
-            <a class="rounded-md line text -gray-600 ml-2text-sm dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                href="{{ route('client.login') }}">
-                {{ __('Login as Client?') }}
-            </a>
-
-        </div>
-    </form>
-</x-guest-layout>
+</html>
