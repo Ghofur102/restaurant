@@ -8,14 +8,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, 'index'])->name('home.page');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/dashboard', [UserController::class, 'UserProfile'])->name('dashboard');
+    Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])->name('user.profile.store');
+    Route::get('/dashboard/change_password', [UserController::class, 'UserChangePassword'])->name('user.change.password');
+    Route::post('/user/update_password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
 });
 
 // All Route for Admin

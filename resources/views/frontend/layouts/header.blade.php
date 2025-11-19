@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark osahan-nav">
     <div class="container">
-        <a class="navbar-brand" href="index.html"><img alt="logo" class="rounded-circle w-50 h-50" src="{{ asset('logo.png') }}"></a>
+        <a class="navbar-brand" href="index.html"><img alt="logo" class="rounded-circle w-50 h-50"
+                src="{{ asset('logo.png') }}"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -39,24 +40,38 @@
                         <a class="dropdown-item" href="extra.html">Extra :)</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <img alt="Generic placeholder image" src="{{ asset('frontend/img/user/4.png') }}" class="nav-osahan-pic rounded-pill">
-                        My Account
-                    </a>
-                    <div class="border-0 shadow-sm dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="orders.html#orders"><i class="icofont-food-cart"></i> Orders</a>
-                        <a class="dropdown-item" href="orders.html#offers"><i class="icofont-sale-discount"></i>
-                            Offers</a>
-                        <a class="dropdown-item" href="orders.html#favourites"><i class="icofont-heart"></i>
-                            Favourites</a>
-                        <a class="dropdown-item" href="orders.html#payments"><i class="icofont-credit-card"></i>
-                            Payments</a>
-                        <a class="dropdown-item" href="orders.html#addresses"><i class="icofont-location-pin"></i>
-                            Addresses</a>
-                    </div>
-                </li>
+                @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <img alt="Generic placeholder image"
+                                src="{{ !empty($profileData->photo) ? asset('upload/user_images/' . $profileData->photo) : asset('upload/no_image.jpg') }}"
+                                class="nav-osahan-pic rounded-pill"> My Account
+                        </a>
+                        <div class="border-0 shadow-sm dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="{{ route('home.page') }}"><i class="icofont-food-cart"></i>
+                                Dashboard</a>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="dropdown-item"><i class="icofont icofont-circled-left"></i>
+                                    Logout</button>
+                            </form>
+                        </div>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{ route('login') }}" role="button">
+                            Login
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register.page') }}">
+                            Register
+                        </a>
+                    </li>
+                @endauth
+
                 <li class="nav-item dropdown dropdown-cart">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">

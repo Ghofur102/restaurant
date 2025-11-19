@@ -50,7 +50,7 @@
                               </div>
                               <button type="submit" class="mb-2 btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold">Sign Up</button>
                               <div class="pt-3 text-center">
-                                 Already have an Account? <a class="font-weight-bold" href="{{ route('login.page') }}">Sign In</a>
+                                 Already have an Account? <a class="font-weight-bold" href="{{ route('login') }}">Sign In</a>
                               </div>
                            </form>
                         </div>

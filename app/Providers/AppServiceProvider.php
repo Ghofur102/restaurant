@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Admin;
 use App\Models\Client;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,6 +35,14 @@ class AppServiceProvider extends ServiceProvider
             if(Auth::guard('admin')->check()) {
                 $id = Auth::guard('admin')->id();
                 $profileData = Admin::find($id);
+
+                $view->with('profileData', $profileData);
+            }
+        });
+        view()->composer(['frontend.dashboard.sidebar', 'frontend.dashboard.profile_user', 'frontend.dashboard.change_password'], function ($view) {
+            if(Auth::user()) {
+                $id = Auth::user()->id;
+                $profileData = User::find($id);
 
                 $view->with('profileData', $profileData);
             }

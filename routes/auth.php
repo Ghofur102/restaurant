@@ -19,7 +19,7 @@ Route::middleware('guest')->group(function () {
         ->name('register.action');
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
-        ->name('login.page');
+        ->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store'])
         ->name('login.action');
